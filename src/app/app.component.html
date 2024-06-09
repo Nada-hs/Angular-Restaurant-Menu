@@ -1,0 +1,52 @@
+  <div class="row mt-5">
+    <div class="col text-center">
+        <h1 class="alert text-white" style="background-color: #6CBBAE;">قائمة الطعام</h1>
+        <div class="row text-white" style="background-color: #008C95;">
+          <div class="col">
+            إجمالي السعر
+            <span>{{total}}</span>
+          </div>
+          <div class="col">
+             عدد الطلبات
+            <span>{{qty}}</span>
+          </div>
+       </div>
+       <div class="p-2 d-flex ">
+        <i class="bi bi-search ml-5 p-2"></i>
+        <input type="text"  placeholder="ابحث في قائمة الطعام" [(ngModel)]="searchText"  class="form-control">
+       </div>
+       <div class="card d-flex align-items-center justify-content-center">
+        <div *ngIf="filteredFoodMenu.length; else noResults" class="card-body">
+            <table class="table w-full overflow-hidden rounded-lg shadow-lg">
+                <thead>
+                    <tr>
+                        <th>رقم المنتج</th>
+                        <th>اسم المنتج</th>
+                        <th>سعر المنتج</th>
+                        <th>وصف المنتج</th>
+                        <th>صورة المنتج</th>
+                        <th>الاختيار</th>
+                    </tr>
+               
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of filteredFoodMenu">
+                        <td class="align-middle">{{item.id}}</td>
+                        <td  class="align-middle">{{item.name}} </td>
+                        <td class="align-middle">{{item.price}} </td>
+                        <td class="align-middle">{{item.description}} </td>
+                        <td class="align-middle"><img [src]="item.img" width="100" height="100" ></td>
+                        <td><input type="checkbox"(change)="sum($event,item.price)" ></td>
+                     
+                        </tr>
+                </tbody>
+            </table>
+        
+          </div>
+          <ng-template #noResults>
+            <h3 class="p-5">لايوجد نتائج لعرضها </h3>
+          </ng-template>
+       </div>
+    </div>
+  </div>
+<router-outlet />
